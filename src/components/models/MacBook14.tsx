@@ -17,7 +17,7 @@ import { Color, SRGBColorSpace } from "three";
 export default function MacBookModel14(props) {
   const { color } = useMacBookStore();
   const { nodes, materials, scene } = useGLTF(
-    "/models/macbook-14-transformed.glb"
+    "/models/macbook-14-transformed.glb",
   );
 
   const texture = useTexture("/screen.png");
