@@ -8,6 +8,7 @@ import { Html } from "@react-three/drei";
 import MacBookModel from "./models/MacBook";
 import useMacBookStore from "../store";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const ModelScroll = () => {
   const groupRef = useRef(null);
@@ -33,7 +34,7 @@ const ModelScroll = () => {
 
   useGSAP(() => {
     // 3D Model Rotation Animation
-    const modelTimeLine = gsap.timeline({
+    const modelTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: "#f-canvas",
         start: "top top",
@@ -99,7 +100,7 @@ const Features = () => {
     <section id="features">
       <h2>See it all in a new light.</h2>
 
-      <Canvas id="f-canvas" camera={{}}>
+      <Canvas id="f-canvas">
         <StudioLights />
         <ambientLight intensity={0.5} />
         <ModelScroll />
