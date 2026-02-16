@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import type { MacBookStore } from "../types";
 
-const useMacBookStore = create((set) => ({
+const useMacBookStore = create<MacBookStore>((set) => ({
   color: "#2e2c2e",
   setColor: (color: string) => set({ color }),
 

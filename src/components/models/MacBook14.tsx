@@ -12,23 +12,27 @@ import { useEffect } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
 import useMacBookStore from "../../store/index.ts";
 import { noChangeParts } from "../../constants/index.ts";
-import { Color, SRGBColorSpace } from "three";
+import { Color, SRGBColorSpace, Mesh } from "three";
+import type { MacBook14Props } from "../../types";
 
-export default function MacBookModel14(props) {
+export default function MacBookModel14(props: MacBook14Props) {
   const { color } = useMacBookStore();
   const { nodes, materials, scene } = useGLTF(
     "/models/macbook-14-transformed.glb",
-  );
+  ) as any; // GLTF nodes have complex types
 
   const texture = useTexture("/screen.png");
   texture.colorSpace = SRGBColorSpace;
   texture.needsUpdate = true;
 
   useEffect(() => {
-    scene.traverse((child) => {
-      if (child.isMesh) {
-        if (!noChangeParts.includes(child.name)) {
-          child.material.color = new Color(color);
+    scene.traverse((child: any) => {
+      if ((child as Mesh).isMesh) {
+        const mesh = child as Mesh;
+        if (!noChangeParts.includes(mesh.name)) {
+          if (mesh.material && "color" in mesh.material) {
+            (mesh.material as any).color = new Color(color);
+          }
         }
       }
     });
