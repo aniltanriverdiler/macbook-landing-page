@@ -25,6 +25,7 @@ export default function MacBookModel14(props: MacBook14Props) {
   texture.colorSpace = SRGBColorSpace;
   texture.needsUpdate = true;
 
+  // Use GSAP to animate the model
   useEffect(() => {
     scene.traverse((child: any) => {
       if ((child as Mesh).isMesh) {

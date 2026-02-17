@@ -5,6 +5,7 @@ import gsap from "gsap";
 const ShowCase = () => {
   const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
 
+  // Use GSAP to animate the showcase
   useGSAP(() => {
     if (!isTablet) {
       const timeline = gsap.timeline({
@@ -26,6 +27,7 @@ const ShowCase = () => {
   }, [isTablet]);
 
   return (
+    // Showcase Section
     <section id="showcase">
       <div className="media">
         <video src="/public/videos/game.mp4" loop muted autoPlay playsInline />
@@ -34,6 +36,7 @@ const ShowCase = () => {
         </div>
       </div>
 
+      {/* Showcase Content */}
       <div className="content">
         <div className="wrapper">
           <div className="lg:max-w-md">
@@ -64,6 +67,7 @@ const ShowCase = () => {
             </div>
           </div>
 
+          {/* Showcase Stats */}
           <div className="max-w-3xs space-y-14">
             <div className="space-y-2">
               <p>Up to</p>

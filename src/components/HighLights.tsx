@@ -5,6 +5,7 @@ import gsap from "gsap";
 const HighLights = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
+  // Use GSAP to animate the highlights
   useGSAP(() => {
     gsap.to([".left-column", ".right-column"], {
       scrollTrigger: {

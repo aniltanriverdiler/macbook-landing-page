@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { PresentationControls } from "@react-three/drei";
 import gsap from "gsap";
 import type { Group, Mesh } from "three";
@@ -33,6 +33,7 @@ const moveGroup = (group: Group | null, x: number): void => {
   gsap.to(group.position, { x, duration: ANIMATION_DURATION });
 };
 
+// Check if the model is visible
 const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
   const SCALE_LARGE_DESKTOP = 0.08;
   const SCALE_LARGE_MOBILE = 0.05;
@@ -43,6 +44,7 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
   const showLargeMacbook =
     scale === SCALE_LARGE_DESKTOP || scale === SCALE_LARGE_MOBILE;
 
+  // Use GSAP to animate the models
   useGSAP(() => {
     if (showLargeMacbook) {
       moveGroup(smallMacBookRef.current, -OFFSET_DISTANCE);
@@ -59,13 +61,16 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
     }
   }, [scale]);
 
-  const controlsConfig = {
-    snap: true,
-    speed: 1,
-    zoom: 1,
-    azimuth: [-Infinity, Infinity] as [number, number],
-    config: { mass: 1, tension: 0, friction: 26 },
-  };
+  const controlsConfig = useMemo(
+    () => ({
+      snap: true,
+      speed: 1,
+      zoom: 1,
+      azimuth: [-Infinity, Infinity] as [number, number],
+      config: { mass: 1, tension: 0, friction: 26 },
+    }),
+    [],
+  );
 
   return (
     <>
