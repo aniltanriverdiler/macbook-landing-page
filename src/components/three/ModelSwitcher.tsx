@@ -74,12 +74,14 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
 
   return (
     <>
+      {/* 16" MacBook */}
       <PresentationControls {...controlsConfig}>
         <group ref={largeMacBookRef}>
           <MacBookModel16 scale={isMobile ? 0.05 : 0.08} />
         </group>
       </PresentationControls>
 
+      {/* 14" MacBook */}
       <PresentationControls {...controlsConfig}>
         <group ref={smallMacBookRef}>
           <MacBookModel14 scale={isMobile ? 0.03 : 0.06} />

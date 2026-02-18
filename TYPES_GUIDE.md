@@ -1,18 +1,18 @@
 # MacBook Landing Page - TypeScript Type System Guide
 
-## 📋 İçindekiler
+## 📋 Table of Contents
 
-1. [Genel Bakış](#genel-bakış)
-2. [Proje Mimarisi](#proje-mimarisi)
-3. [Tip Tanımlamaları](#tip-tanımlamaları)
-4. [Kullanım Örnekleri](#kullanım-örnekleri)
+1. [Overview](#overview)
+2. [Project Architecture](#project-architecture)
+3. [Type Definitions](#type-definitions)
+4. [Usage Examples](#usage-examples)
 5. [Best Practices](#best-practices)
 
 ---
 
-## Genel Bakış
+## Overview
 
-Bu proje, TypeScript ile tip güvenli bir MacBook landing page uygulamasıdır. Aşağıdaki teknolojiler kullanılmaktadır:
+This project is a type-safe MacBook landing page application built with TypeScript. The following technologies are used:
 
 - **React 19** - UI library
 - **TypeScript 5.9** - Type safety
@@ -21,7 +21,7 @@ Bu proje, TypeScript ile tip güvenli bir MacBook landing page uygulamasıdır. 
 - **GSAP** - Animations
 - **Tailwind CSS** - Styling
 
-## Proje Mimarisi
+## Project Architecture
 
 ```
 src/
@@ -45,23 +45,23 @@ src/
     └── README.md       # Types documentation
 ```
 
-## Tip Tanımlamaları
+## Type Definitions
 
 ### 1. Store Types (`src/types/store.ts`)
 
 #### MacBookStoreState
-Store'un state kısmını tanımlar:
+Defines the state portion of the store:
 
 ```typescript
 export interface MacBookStoreState {
-  color: string;        // Seçili renk
-  scale: number;        // Model boyutu (0.06 veya 0.08)
-  texture: string;      // Ekran texture yolu
+  color: string;        // Selected color
+  scale: number;        // Model size (0.06 or 0.08)
+  texture: string;      // Screen texture path
 }
 ```
 
 #### MacBookStoreActions
-Store action'larını tanımlar:
+Defines store actions:
 
 ```typescript
 export interface MacBookStoreActions {
@@ -73,13 +73,13 @@ export interface MacBookStoreActions {
 ```
 
 #### MacBookStore
-Tam store tipini tanımlar (State + Actions):
+Defines the full store type (State + Actions):
 
 ```typescript
 export type MacBookStore = MacBookStoreState & MacBookStoreActions;
 ```
 
-**Kullanım:**
+**Usage:**
 ```typescript
 import { create } from 'zustand';
 import type { MacBookStore } from './types';
@@ -96,7 +96,7 @@ const useMacBookStore = create<MacBookStore>((set) => ({
 ### 2. Constants Types (`src/types/constants.ts`)
 
 #### NavLink
-Navigasyon menü öğeleri için:
+For navigation menu items:
 
 ```typescript
 export interface NavLink {
@@ -105,7 +105,7 @@ export interface NavLink {
 ```
 
 #### PerformanceImage
-Performans bölümündeki görseller için:
+For images in the performance section:
 
 ```typescript
 export interface PerformanceImage {
@@ -116,7 +116,7 @@ export interface PerformanceImage {
 ```
 
 #### PerformanceImagePosition
-Görsellerin pozisyon bilgileri için:
+For image position information:
 
 ```typescript
 export interface PerformanceImagePosition {
@@ -129,7 +129,7 @@ export interface PerformanceImagePosition {
 ```
 
 #### Feature
-Özellik kartları için:
+For feature cards:
 
 ```typescript
 export interface Feature {
@@ -142,7 +142,7 @@ export interface Feature {
 ```
 
 #### FeatureSequence
-Video geçişleri için:
+For video transitions:
 
 ```typescript
 export interface FeatureSequence {
@@ -153,7 +153,7 @@ export interface FeatureSequence {
 ```
 
 #### FooterLink
-Footer linkleri için:
+For footer links:
 
 ```typescript
 export interface FooterLink {
@@ -162,7 +162,7 @@ export interface FooterLink {
 }
 ```
 
-**Kullanım:**
+**Usage:**
 ```typescript
 import type { Feature, FooterLink } from './types';
 
@@ -186,7 +186,7 @@ const footerLinks: FooterLink[] = [
 ### 3. Component Props Types (`src/types/components.ts`)
 
 #### ModelSwitcherProps
-3D model değiştirici component için:
+For the 3D model switcher component:
 
 ```typescript
 export interface ModelSwitcherProps {
@@ -196,7 +196,7 @@ export interface ModelSwitcherProps {
 ```
 
 #### MacBookModelProps
-Genel MacBook 3D model props:
+General MacBook 3D model props:
 
 ```typescript
 export interface MacBookModelProps {
@@ -207,14 +207,14 @@ export interface MacBookModelProps {
 ```
 
 #### MacBook14Props & MacBook16Props
-14" ve 16" model için özel props:
+Specific props for 14" and 16" models:
 
 ```typescript
 export interface MacBook14Props extends MacBookModelProps {}
 export interface MacBook16Props extends MacBookModelProps {}
 ```
 
-**Kullanım:**
+**Usage:**
 ```typescript
 import type { ModelSwitcherProps } from './types';
 
@@ -228,7 +228,7 @@ const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
 ### 4. Common Types (`src/types/common.ts`)
 
 #### MacBookColor, MacBookScale, MacBookSize
-Temel tipler:
+Base types:
 
 ```typescript
 export type MacBookColor = "#adb5bd" | "#2e2c2e" | string;
@@ -237,7 +237,7 @@ export type MacBookSize = "14" | "16";
 ```
 
 #### Position3D & Rotation3D
-3D pozisyon ve rotasyon için:
+For 3D position and rotation:
 
 ```typescript
 export type Position3D = [number, number, number];
@@ -245,7 +245,7 @@ export type Rotation3D = [number, number, number];
 ```
 
 #### AnimationConfig
-GSAP animasyonları için:
+For GSAP animations:
 
 ```typescript
 export interface AnimationConfig {
@@ -258,7 +258,7 @@ export interface AnimationConfig {
 }
 ```
 
-#### Sabitler
+#### Constants
 
 ```typescript
 export const BREAKPOINTS = {
@@ -272,7 +272,7 @@ export const SCALE_VALUES = {
 } as const;
 ```
 
-**Kullanım:**
+**Usage:**
 ```typescript
 import type { Position3D, AnimationConfig } from './types';
 import { BREAKPOINTS, SCALE_VALUES } from './types';
@@ -283,16 +283,16 @@ const animConfig: AnimationConfig = {
   ease: "power1.out"
 };
 
-// Sabitler
+// Constants
 const isMobile = useMediaQuery({ query: BREAKPOINTS.mobile });
 const scale = isMobile ? SCALE_VALUES.large.mobile : SCALE_VALUES.large.desktop;
 ```
 
 ---
 
-## Kullanım Örnekleri
+## Usage Examples
 
-### Örnek 1: Zustand Store Kullanımı
+### Example 1: Zustand Store Usage
 
 ```typescript
 // src/store/index.ts
@@ -319,25 +319,25 @@ const useMacBookStore = create<MacBookStore>((set) => ({
 export default useMacBookStore;
 ```
 
-### Örnek 2: Component Props
+### Example 2: Component Props
 
 ```typescript
-// Component tanımı
+// Component definition
 import type { ModelSwitcherProps } from "../types";
 
 const ModelSwitcher = ({ scale, isMobile }: ModelSwitcherProps) => {
-  // TypeScript artık scale ve isMobile'ın tiplerini biliyor
+  // TypeScript now knows the types of scale and isMobile
   console.log(scale); // number
   console.log(isMobile); // boolean
   
   return <group>...</group>;
 };
 
-// Component kullanımı
+// Component usage
 <ModelSwitcher scale={0.08} isMobile={false} />
 ```
 
-### Örnek 3: Constants ile Çalışma
+### Example 3: Working with Constants
 
 ```typescript
 // src/constants/index.ts
@@ -351,23 +351,23 @@ const features: Feature[] = [
     text: "AI powered email management",
     styles: "left-5 top-[20%]"
   },
-  // TypeScript her property'nin doğru tipte olduğunu kontrol eder
+  // TypeScript checks that each property has the correct type
 ];
 
 const navLinks: NavLink[] = [
   { label: "Store" },
   { label: "Mac" },
-  // Her item'da label olması zorunlu
+  // Each item must have a label
 ];
 ```
 
-### Örnek 4: 3D Model Props
+### Example 4: 3D Model Props
 
 ```typescript
 import type { MacBookModelProps } from "../types";
 
 function MacBookModel({ scale = 0.08, position = [0, 0, 0], rotation }: MacBookModelProps) {
-  // scale, position ve rotation'ın tipleri bellialso optional
+  // scale, position and rotation types are known; props are also optional
   
   return (
     <group position={position} rotation={rotation} scale={scale}>
@@ -376,12 +376,12 @@ function MacBookModel({ scale = 0.08, position = [0, 0, 0], rotation }: MacBookM
   );
 }
 
-// Kullanım
+// Usage
 <MacBookModel scale={0.06} position={[0, -1, 0]} />
-<MacBookModel /> // Defaults kullanılır
+<MacBookModel /> // Uses defaults
 ```
 
-### Örnek 5: Animation Config
+### Example 5: Animation Config
 
 ```typescript
 import type { AnimationConfig } from "../types";
@@ -398,7 +398,7 @@ const animateElement = (element: HTMLElement, config: AnimationConfig) => {
   });
 };
 
-// Kullanım
+// Usage
 animateElement(myElement, {
   duration: 2,
   opacity: 1,
@@ -411,29 +411,29 @@ animateElement(myElement, {
 
 ## Best Practices
 
-### ✅ DO (Yapılması Gerekenler)
+### ✅ DO
 
-1. **Type Import Kullan**
+1. **Use Type Import**
    ```typescript
-   // ✅ Doğru
+   // ✅ Correct
    import type { Feature } from './types';
    
-   // ❌ Yanlış
+   // ❌ Wrong
    import { Feature } from './types';
    ```
 
 2. **Explicit Type Annotations**
    ```typescript
-   // ✅ Doğru
+   // ✅ Correct
    const features: Feature[] = [...];
    
-   // ❌ Yanlış
+   // ❌ Wrong
    const features = [...]; // implicit any
    ```
 
 3. **Component Props Interface**
    ```typescript
-   // ✅ Doğru
+   // ✅ Correct
    interface MyComponentProps {
      title: string;
      count: number;
@@ -441,48 +441,48 @@ animateElement(myElement, {
    
    const MyComponent = ({ title, count }: MyComponentProps) => { ... };
    
-   // ❌ Yanlış
+   // ❌ Wrong
    const MyComponent = ({ title, count }) => { ... }; // implicit any
    ```
 
-4. **Merkezi Type Export**
+4. **Central Type Export**
    ```typescript
-   // ✅ Doğru
+   // ✅ Correct
    import type { Feature, FooterLink } from '@/types';
    
-   // ❌ Yanlış
+   // ❌ Wrong
    import type { Feature } from '@/types/constants';
    ```
 
-5. **Optional Props Belirt**
+5. **Mark Optional Props**
    ```typescript
-   // ✅ Doğru
+   // ✅ Correct
    interface Props {
      required: string;
      optional?: number;
    }
    
-   // ❌ Yanlış - her şeyi optional yapmak
+   // ❌ Wrong - making everything optional
    interface Props {
      required?: string;
      optional?: number;
    }
    ```
 
-### ❌ DON'T (Yapılmaması Gerekenler)
+### ❌ DON'T
 
-1. **Any Kullanma**
+1. **Avoid Using Any**
    ```typescript
-   // ❌ Kaçının
+   // ❌ Avoid
    const data: any = { ... };
    
-   // ✅ Bunun yerine proper type kullanın
+   // ✅ Use a proper type instead
    const data: Feature = { ... };
    ```
 
-2. **Type Assertions Aşırı Kullanımı**
+2. **Excessive Type Assertions**
    ```typescript
-   // ❌ Aşırı assertion
+   // ❌ Excessive assertion
    const value = (data as any).property;
    
    // ✅ Proper typing
@@ -492,12 +492,12 @@ animateElement(myElement, {
    const value = data.property;
    ```
 
-3. **İnline Type Definitions**
+3. **Inline Type Definitions**
    ```typescript
-   // ❌ Inline tip tanımları
+   // ❌ Inline type definitions
    const Component = (props: { name: string; age: number }) => { ... };
    
-   // ✅ Ayrı interface
+   // ✅ Separate interface
    interface ComponentProps {
      name: string;
      age: number;
@@ -507,9 +507,9 @@ animateElement(myElement, {
 
 ---
 
-## TypeScript Konfigürasyonu
+## TypeScript Configuration
 
-Proje `strict` mode ile çalışmaktadır:
+The project runs with `strict` mode enabled:
 
 ```json
 {
@@ -522,11 +522,11 @@ Proje `strict` mode ile çalışmaktadır:
 }
 ```
 
-Bu, maksimum tip güvenliği sağlar ve potansiyel hataları derleme zamanında yakalar.
+This ensures maximum type safety and catches potential errors at compile time.
 
 ---
 
-## Yararlı Linkler
+## Useful Links
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
@@ -535,13 +535,13 @@ Bu, maksimum tip güvenliği sağlar ve potansiyel hataları derleme zamanında 
 
 ---
 
-## Yardım ve Destek
+## Help and Support
 
-Tip tanımlamaları hakkında sorularınız için:
-1. `src/types/README.md` dosyasına bakın
-2. Mevcut kullanım örneklerini inceleyin
-3. TypeScript compiler hata mesajlarını okuyun (genellikle çok yardımcıdır)
+For questions about type definitions:
+1. Check the `src/types/README.md` file
+2. Review existing usage examples
+3. Read TypeScript compiler error messages (they are usually very helpful)
 
 ---
 
-**Son Güncelleme:** 2026-02-16
+**Last Updated:** 2026-02-16
