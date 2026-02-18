@@ -19,10 +19,10 @@ const Navbar = () => {
         {/* Search and Cart Buttons */}
         <div className="flex-center gap-3">
           <button>
-            <img src="/public/search.svg" alt="Search" />
+            <img src="/search.svg" alt="Search" />
           </button>
           <button>
-            <img src="/public/cart.svg" alt="Cart" />
+            <img src="/cart.svg" alt="Cart" />
           </button>
         </div>
       </nav>

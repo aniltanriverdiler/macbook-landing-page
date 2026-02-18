@@ -8,7 +8,7 @@ const useMacBookStore = create<MacBookStore>((set) => ({
   scale: 0.08,
   setScale: (scale: number) => set({ scale }),
 
-  texture: "/public/videos/feature-1.mp4",
+  texture: "/videos/feature-1.mp4",
   setTexture: (texture: string) => set({ texture }),
 
   reset: () =>
