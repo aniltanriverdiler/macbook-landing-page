@@ -34,6 +34,10 @@ const ProductViewer = () => {
                 color === "#2e2c2e" && "active",
               )}
             />
+            <div
+              onClick={() => setColor("#749fbb")}
+              className={clsx("bg-blue-400", color === "#749fbb" && "active")}
+            />
           </div>
 
           {/* Size Control */}
