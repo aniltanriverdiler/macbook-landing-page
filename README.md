@@ -12,9 +12,9 @@ This is an **unofficial, fan-made Apple-inspired concept project**. All product 
 
 ## 🚀 Live Demo & Source Code
 
-🔗 **Live Demo:** _(Add your deployment URL here)_
+🔗 **Live Demo:** [https://macbook-landing-page-apple.vercel.app/](https://macbook-landing-page-apple.vercel.app/)
 
-💻 **GitHub Repository:** _(Add your repository URL here)_
+💻 **GitHub Repository:** [https://github.com/aniltanriverdiler/macbook-landing-page.git](https://github.com/aniltanriverdiler/macbook-landing-page.git)
 
 ---
 
@@ -103,7 +103,7 @@ macbook-landing-page/
 
 1️⃣ **Clone the repository:**
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/aniltanriverdiler/macbook-landing-page.git
 cd macbook-landing-page
 ```
 
